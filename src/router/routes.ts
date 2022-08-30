@@ -8,12 +8,10 @@ import {
   BellIcon,
   LocationMarkerIcon,
   UserIcon,
-  ColorSwatchIcon
+  ColorSwatchIcon,
 } from '@heroicons/vue/outline'
 
-import {
-  CreditCardIcon,
-} from '@heroicons/vue/solid'
+import { CreditCardIcon } from '@heroicons/vue/solid'
 
 const Login = () => import('modules/auth/views/login.vue')
 const Register = () => import('modules/auth/views/register.vue')
@@ -29,9 +27,9 @@ const Card = () => import('modules/cards/views/index.vue')
 const Icons = () => import('modules/icons/views/index.vue')
 const Profile = () => import('modules/profile/views/index.vue')
 const Map = () => import('modules/map/views/index.vue')
+const Users = () => import('modules/user/index.vue')
 
 const ComponentLayout = () => import('components/ComponentLayout/index.vue')
-
 
 const routes = [
   {
@@ -43,7 +41,7 @@ const routes = [
       icon: HomeIcon,
       color: 'text-indigo-410',
       requiresAuth: true,
-      parentPath: 'Home'
+      parentPath: 'Home',
     },
   },
   {
@@ -55,7 +53,7 @@ const routes = [
       icon: ColorSwatchIcon,
       color: 'text-info',
       requiresAuth: true,
-      parentPath: 'Components'
+      parentPath: 'Components',
     },
     children: [
       {
@@ -135,21 +133,20 @@ const routes = [
           requiresAuth: true,
         },
       },
-    ]
+    ],
   },
-  
   {
-    path: '/profile',
-    component: Profile,
-    name: 'Profile',
+    path: '/users',
+    component: Users,
+    name: 'Users',
     meta: {
-      title: 'Profile',
+      title: 'Users',
       icon: UserIcon,
       color: 'text-success-50',
       isDarkBackground: true,
       isFullWidthLayout: true,
       requiresAuth: true,
-      parentPath: 'Home'
+      parentPath: 'Home',
     },
   },
   {
@@ -161,7 +158,7 @@ const routes = [
       icon: LocationMarkerIcon,
       color: 'text-red-410',
       requiresAuth: true,
-      parentPath: 'Home'
+      parentPath: 'Home',
     },
   },
   {
@@ -181,7 +178,6 @@ const routes = [
     },
   },
   {
-    
     path: '/login',
     component: Login,
     name: 'login',
