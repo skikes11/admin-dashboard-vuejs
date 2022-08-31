@@ -10,9 +10,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
 import 'sweetalert2/dist/sweetalert2.min.css'
-
 import './index.css'
 import router from './router'
 // create new app instance
@@ -21,7 +19,6 @@ const createNewApp = () => {
     render: () => h(App),
   })
   library.add(fas, fab)
-
   app.component('font-awesome-icon', FontAwesomeIcon)
   app.provide('eventHub', vueEmitter)
   app.use(router)

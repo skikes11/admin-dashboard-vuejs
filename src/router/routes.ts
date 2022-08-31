@@ -28,7 +28,8 @@ const Icons = () => import('modules/icons/views/index.vue')
 const Profile = () => import('modules/profile/views/index.vue')
 const Map = () => import('modules/map/views/index.vue')
 const Users = () => import('modules/user/index.vue')
-
+const AddUser = () => import('modules/user/components/AddUser.vue')
+const EditUser = () => import('modules/user/components/EditUser.vue')
 const ComponentLayout = () => import('components/ComponentLayout/index.vue')
 
 const routes = [
@@ -175,6 +176,30 @@ const routes = [
     name: 'forgot-password',
     meta: {
       requiresAuth: false,
+    },
+  },
+  {
+    path: '/users/add',
+    component: AddUser,
+    name: 'AddUser',
+    meta: {
+      color: 'text-success-50',
+      isDarkBackground: true,
+      isFullWidthLayout: true,
+      requiresAuth: true,
+      parentPath: 'Home',
+    },
+  },
+  {
+    path: '/users/edit/:id',
+    component: EditUser,
+    name: 'EditUser',
+    meta: {
+      color: 'text-success-50',
+      isDarkBackground: true,
+      isFullWidthLayout: true,
+      requiresAuth: true,
+      parentPath: 'Home',
     },
   },
   {

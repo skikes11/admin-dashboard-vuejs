@@ -3,21 +3,14 @@
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-3 lg:gap-6">
       <!-- Modals - Default -->
       <div class="w-full">
-        <el-button type="primary" class="w-full" @click="openDefaultModal = !openDefaultModal"
-          >Default</el-button
-        >
+        <el-button type="primary" class="w-full" @click="openDefaultModal = !openDefaultModal">Default</el-button>
         <DefaultModal :triggerModal="openDefaultModal" @close-modal="openDefaultModal = false" />
       </div>
 
       <!-- Modal - Danger -->
       <div class="w-full">
-        <el-button type="warning" class="w-full" @click="openWarningModal = !openWarningModal"
-          >Notification</el-button
-        >
-        <WarningModal
-          :triggerWarningModal="openWarningModal"
-          @close-warning-modal="openWarningModal = false"
-        />
+        <el-button type="warning" class="w-full" @click="openWarningModal = !openWarningModal">Notification</el-button>
+        <WarningModal :triggerWarningModal="openWarningModal" @close-warning-modal="openWarningModal = false" />
       </div>
 
       <!-- Modals - Form -->
@@ -34,6 +27,7 @@
 <script lang="ts">
 import { defineComponent, ref, reactive } from 'vue'
 import LoginForm from 'modules/auth/views/components/LoginForm.vue'
+import Login from 'modules/auth/views/login.vue'
 import DefaultModal from './DefaultModal.vue'
 import WarningModal from './WarningModal.vue'
 

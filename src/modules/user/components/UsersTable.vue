@@ -17,7 +17,7 @@
       <el-table-column label="USERNAME" min-width="80">
         <template #default="scope">
           <div class="px-4 cursor-auto">
-            <span class="text-0.8125 font-semibold">{{  scope.row.name  }}</span>
+            <span class="text-0.8125 font-semibold">{{ scope.row.name }}</span>
           </div>
         </template>
       </el-table-column>
@@ -33,14 +33,14 @@
                     ? 'bg-warning'
                     : 'bg-success',
             ]"></i>
-            <span class="ml-2 pb-0.5 text-0.875 font-semibold">{{  scope.row.active  }}</span>
+            <span class="ml-2 pb-0.5 text-0.875 font-semibold">{{ scope.row.active }}</span>
           </div>
         </template>
       </el-table-column>
       <el-table-column label="EMAIL" min-width="150">
         <template #default="scope">
           <div class="px-4 cursor-auto">
-            <span class="text-0.8125 font-semibold">{{  scope.row.email  }}</span>
+            <span class="text-0.8125 font-semibold">{{ scope.row.email }}</span>
           </div>
         </template>
       </el-table-column>
@@ -49,7 +49,7 @@
         <template #default="scope">
           <div class="px-4 flex flex-row items-center">
             <div>
-              <span class="text-0.8125 font-semibold">{{  scope.row.role.name  }}</span>
+              <span class="text-0.8125 font-semibold">{{ scope.row.role.name }}</span>
             </div>
 
           </div>
@@ -60,52 +60,67 @@
         <template #default="scope">
           <div class="px-4 flex flex-row items-center">
             <div>
-              <span class="text-0.8125 font-semibold">{{  scope.row.phone  }}</span>
+              <span class="text-0.8125 font-semibold">{{ scope.row.phone }}</span>
             </div>
           </div>
         </template>
       </el-table-column>
 
 
+
+
+
       <el-table-column width="60" fixed="right">
-        <div class="text-center h-12 pt-2.5">
-          <el-dropdown placement="bottom-end" trigger="click" popper-class="action-column-popper">
-            <el-button class="w-5 h-7 border-none bg-transparent hover:shadow-md" plain>
-              <div class="flex items-center space-x-2 2xl:space-x-4 text-black px-5">
-                <DotsVerticalIcon class="cursor-pointer h-5 w-5 text-[#ced4da] font-extrabold" />
-              </div>
-            </el-button>
-            <template #dropdown>
-              <el-dropdown-menu class="my-0.5">
+        <template #default="scope">
+          <DeleteDialog :triggerModal="openDeleteDiaLog" @close-modal="openDeleteDiaLog = false"
+            :userName="scope.row.name" :userID="scope.row._id" v-on:deleteUser="confirmDelete(scope.$index)" />
+          <div class="text-center h-12 pt-2.5">
+            <el-dropdown placement="bottom-end" trigger="click" popper-class="action-column-popper">
+              <el-button class="w-5 h-7 border-none bg-transparent hover:shadow-md" plain>
+                <div class="flex items-center space-x-2 2xl:space-x-4 text-black px-5">
+                  <DotsVerticalIcon class="cursor-pointer h-5 w-5 text-[#ced4da] font-extrabold" />
+                </div>
+              </el-button>
+              <template #dropdown>
 
+                <el-dropdown-menu class="my-0.5">
+                  <el-dropdown-item class="mx-0 hover:bg-secondary text-zinc-800" v-on:click="editUser(scope.row._id)">
+                    <div class="flex items-center w-40 h-6">
+                      <span class="mb-0 text-sm font-normal">EDIT</span>
+                    </div>
+                  </el-dropdown-item>
 
-                <el-dropdown-item class="mx-0 hover:bg-secondary text-zinc-800">
-                  <div class="flex items-center w-40 h-6">
-                    <span class="mb-0 text-sm font-normal">EDIT</span>
-                  </div>
-                </el-dropdown-item>
+                  <el-dropdown-item class="mx-0 hover:bg-secondary text-zinc-800"
+                    v-on:click="deleteUser(scope.row._id)">
+                    <div class="flex items-center w-40 h-6">
+                      <span class="mb-0 text-sm font-normal">DELETE</span>
+                    </div>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
 
-                <el-dropdown-item class="mx-0 hover:bg-secondary text-zinc-800">
-                  <div class="flex items-center w-40 h-6">
-                    <span class="mb-0 text-sm font-normal">DELETE</span>
-                  </div>
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-        </div>
+              </template>
+
+            </el-dropdown>
+          </div>
+
+        </template>
       </el-table-column>
     </el-table>
+
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { DotsVerticalIcon } from '@heroicons/vue/outline'
+import api from '../../../api/apiServices'
+import DeleteDialog from "../../notification/views/components/DeleteDialog.vue"
+
 
 export default defineComponent({
   name: 'ProjectTable',
   components: {
     DotsVerticalIcon,
+    DeleteDialog
   },
   props: {
     tableData: {
@@ -119,6 +134,7 @@ export default defineComponent({
     },
   },
   setup() {
+    const openDeleteDiaLog = ref(false)
     const theme = ref([
       { status: 'on schedule', color: '#11CDEF' },
       { status: 'delayed', color: '#F5365C' },
@@ -129,7 +145,20 @@ export default defineComponent({
     }
     return {
       customColorMethod,
+      openDeleteDiaLog
     }
   },
+  methods: {
+    editUser(id) {
+      this.$router.push(`/users/edit/${id}`);
+    },
+    deleteUser(id) {
+
+      this.openDeleteDiaLog = true
+    },
+    confirmDelete(id) {
+      console.log("ID BEFORE confirm", id)
+    }
+  }
 })
 </script>
