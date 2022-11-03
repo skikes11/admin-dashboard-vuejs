@@ -4,6 +4,7 @@
     <div class="main-content flex flex-col flex-1 w-full overflow-auto"
       :class="`${!isSBPin ? ' ml-17 ' : 'ml-62.5 cursor-pointer lg:cursor-default'}`">
       <navigation />
+      <notifications />
       <div class="w-full h-38 relative bg-transparent border-none" :class="{
         'bg-indigo-410': !route.meta.isDarkBackground,
       }">

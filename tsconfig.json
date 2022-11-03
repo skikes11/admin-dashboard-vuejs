@@ -30,6 +30,6 @@
       "mixins": ["src/mixins/index.ts"],
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "registerServiceWorker.ts", "registerServiceWorker.ts", "src/firebase-messaging-sw.js", "src/firebase-messaging.js"],
   "exclude": ["node_modules", "node_modules/**"]
 }

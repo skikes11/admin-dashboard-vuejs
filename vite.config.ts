@@ -1,5 +1,6 @@
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
+import mkcert from 'vite-plugin-mkcert'
 import { defineConfig } from 'vite'
 const { visualizer } = require('rollup-plugin-visualizer')
 import AutoImport from 'unplugin-auto-import/vite'
@@ -11,8 +12,10 @@ const resolvePath = (dir: string) => {
 }
 
 export default defineConfig({
+  server: { https: true },
   plugins: [
     vue(),
+    mkcert(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
     }),
@@ -20,6 +23,7 @@ export default defineConfig({
       resolvers: [ElementPlusResolver({ importStyle: 'sass' })],
     }),
   ],
+
   resolve: {
     alias: {
       assets: resolvePath('assets'),

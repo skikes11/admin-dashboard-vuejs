@@ -17,7 +17,7 @@
       <el-table-column label="USERNAME" min-width="80">
         <template #default="scope">
           <div class="px-4 cursor-auto">
-            <span class="text-0.8125 font-semibold">{{ scope.row.name }}</span>
+            <span class="text-0.8125 font-semibold" v-if="scope.row.name">{{ scope.row.name }}</span>
           </div>
         </template>
       </el-table-column>
